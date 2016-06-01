@@ -3,6 +3,7 @@
 
 // node
 const fs = require('fs');
+const fse = require('fs-extra');
 const path = require('path');
 // vendors
 const mkdirp = require('mkdirp');
@@ -14,16 +15,18 @@ const processFile = (inputPath, outputPath, cb) => {
     if (err) {
       cb(err);
     } else {
-      fs.createReadStream(inputPath).pipe(fs.createWriteStream(outputPath));
+      // copy the file as is
+      console.log('copy', path.relative(root, inputPath), '>', path.relative(root, outputPath));
+      fse.copy(inputPath, outputPath, cb);
     }
   })
 };
 // locals
 function Processor(relativePath, absolutePath, done) {
-  const outputPath = path.join(root,  relativePath.replace('assets', 'dist'));
+  const outputPath = path.join(root, relativePath.replace('assets', 'dist'));
   processFile(absolutePath, outputPath, done);
 }
 // skip css files
-Processor.canProcess = (relativePath) => relativePath.startsWith('assets') && (relativePath.indexOf('.css') === -1);
+Processor.canProcess = (relativePath) => relativePath.startsWith('assets');
 
 module.exports = Processor;

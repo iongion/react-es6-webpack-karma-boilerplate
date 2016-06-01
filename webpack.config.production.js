@@ -36,7 +36,7 @@ module.exports = {
         warnings: false,
       },
     }),
-    new ExtractTextPlugin('css/styles.css', { allChunks: true }),
+    new ExtractTextPlugin('css/components.css', { allChunks: true }),
   ],
   module: {
     loaders: [

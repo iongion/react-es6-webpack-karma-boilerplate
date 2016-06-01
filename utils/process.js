@@ -12,14 +12,27 @@ const root = path.dirname(__dirname);
 const src = path.join(root, 'src');
 const processors = requireDir('./processors');
 const startProcessing = (relativePath, absolutePath, cb) => {
-  for (var p in processors) {
-    if (!processors.hasOwnProperty(p)) continue;
-    const Processor = processors[p];
+  var processorNames = Object.keys(processors);
+  var processNext = function() {
+    if (processorNames.length === 0) {
+      cb();
+      return;
+    }
+    const processorName = processorNames.pop();
+    const Processor = processors[processorName];
     if (Processor.canProcess(relativePath, absolutePath)) {
-      Processor(relativePath, absolutePath);
-    } 
+      Processor(relativePath, absolutePath, function(error) {
+        if (error) {
+          cb(error);
+        } else {
+          processNext();
+        }
+      });
+    } else {
+      processNext();
+    }
   }
-  cb();
+  processNext();
 };
 // traverse the source tree just once
 const options = {

@@ -29,7 +29,7 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new ExtractTextPlugin('css/styles.css', { allChunks: true }),
+    new ExtractTextPlugin('css/components.css', { allChunks: true }),
   ],
   module: {
     loaders: [
