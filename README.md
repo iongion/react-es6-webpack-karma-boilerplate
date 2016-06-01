@@ -41,3 +41,11 @@ This will auto watch all files for changes and rerun the tests. Ideal for develo
 ```
 npm run test_watch
 ```
+
+### Configuration
+#### Babel configuration
+TODO
+#### Webpack configuration
+TODO
+#### Karma configuration
+TODO

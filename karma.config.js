@@ -1,47 +1,60 @@
-var webpack = require('karma-webpack');
-var webpackConfig = require('./webpack.config');
+/* ES5 file %*/
+// node
+// vendors
+const webpack = require('karma-webpack');
+// project
+const webpackConfig = require('./webpack.config');
+// locals
+webpackConfig.externals = {};
+webpackConfig.devtool = 'inline-source-map';
 webpackConfig.module.loaders = [
   {
     test: /\.(js|jsx)$/, exclude: /(bower_components|node_modules)/,
-    loader: 'babel-loader'
-  }
+    loader: 'babel-loader',
+  },
 ];
 webpackConfig.module.postLoaders = [{
   test: /\.(js|jsx)$/, exclude: /(node_modules|bower_components|tests)/,
-  loader: 'istanbul-instrumenter'
+  loader: 'istanbul-instrumenter',
 }];
 
-module.exports = function (config) {
+module.exports = function exports(config) {
   config.set({
-    frameworks: [ 'jasmine' ],
+    frameworks: ['mocha', 'sinon-chai'],
     files: [
       './node_modules/phantomjs-polyfill/bind-polyfill.js',
-      'tests/**/*_spec.js'
+      'tests/**/*_spec.js',
     ],
     plugins: [
-      webpack, 
-      'karma-jasmine',
+      webpack,
+      'karma-mocha',
+      'karma-sinon-chai',
       'karma-chrome-launcher',
       'karma-firefox-launcher',
       'karma-phantomjs-launcher',
       'karma-coverage',
-      'karma-spec-reporter'
+      'karma-spec-reporter',
     ],
-    browsers: [ 'PhantomJS' ],
+    browsers: ['PhantomJS'],
     preprocessors: {
       'tests/**/*_spec.js': ['webpack'],
-      'src/**/*.js': ['webpack']
+      'src/**/*.js': ['webpack'],
     },
-    reporters: [ 'spec', 'coverage' ],
+    reporters: ['spec', 'coverage'],
     coverageReporter: {
       dir: 'build/reports/coverage',
       reporters: [
         { type: 'html', subdir: 'report-html' },
         { type: 'lcov', subdir: 'report-lcov' },
         { type: 'cobertura', subdir: '.', file: 'cobertura.txt' }
-      ]
+      ],
+    },
+    client: {
+      chai: {
+        includeStack: true,
+      },
     },
     webpack: webpackConfig,
-    webpackMiddleware: { noInfo: true }
+    webpackMiddleware: { noInfo: true },
   });
 };

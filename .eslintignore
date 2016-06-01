@@ -1,6 +1,5 @@
 dist/*
 node_modules/*
+src/assets/*
+src/index.httml
 **/node_modules/*
-tests/*
-*.config.js
-*.config.production.js

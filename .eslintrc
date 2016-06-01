@@ -1,6 +1,15 @@
 {
   "parser": "babel-eslint",
   "extends": "airbnb",
+  "rules": {
+    "max-len": [
+      "error", {
+        "code": 120,
+        "ignoreUrls": true,
+        "ignoreComments": true
+      }
+    ]
+  },
   "plugins": [
     "babel",
     "import",
@@ -15,5 +24,18 @@
   "ecmaFeatures": {
     "modules": true,
     "jsx": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx"],
+        "moduleDirectory": [
+          ".",
+          "src/modules",
+          "test/modules",
+          "node_modules"
+        ]
+      }
+    }
   }
 }

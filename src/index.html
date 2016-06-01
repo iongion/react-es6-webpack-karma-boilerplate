@@ -1,0 +1,15 @@
+<html lang="en"
+  data-app-version="<%= package.version %>" 
+  data-track-id="<%= package.config.google.trackid %>">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="author" content="<%= package.author.name %>(<%= package.author.email %>)" />
+  <meta name="description" content="<%= package.description %>" />
+  <title><%= package.config.application.title %></title>
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="css/styles.css?v=<%= package.version %>">
+</head>
+<body>
+  <script src="bundle.js?v=<%= package.version %>"></script>
+</body>
+</html>
