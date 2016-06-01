@@ -5,6 +5,7 @@
 // vendors
 const webpack = require('karma-webpack');
 // project
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpackConfig = require('./webpack.config');
 // locals
 webpackConfig.externals = {};
@@ -13,6 +14,21 @@ webpackConfig.module.loaders = [
   {
     test: /\.(js|jsx)$/, exclude: /(bower_components|node_modules)/,
     loader: 'babel-loader',
+  },
+  {
+    test: /\.css$/,
+    loader: ExtractTextPlugin.extract(
+      'style-loader',
+      'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader'
+    ),
+  },
+  {
+    test: /\.svg$/,
+    loader: 'url-loader?limit=10000&mimetype=image/svg+xml',
+  },
+  {
+    test: /\.html$/,
+    loaders: ['html-loader'],
   },
 ];
 webpackConfig.module.postLoaders = [{
@@ -25,7 +41,7 @@ module.exports = function exports(config) {
     frameworks: ['mocha', 'sinon-chai'],
     files: [
       './node_modules/phantomjs-polyfill/bind-polyfill.js',
-      'tests/**/*_spec.js',
+      'test/modules/**/*.spec.js',
     ],
     plugins: [
       webpack,
@@ -39,7 +55,7 @@ module.exports = function exports(config) {
     ],
     browsers: ['PhantomJS'],
     preprocessors: {
-      'tests/**/*_spec.js': ['webpack'],
+      'test/modules/**/*.spec.js': ['webpack'],
       'src/**/*.js': ['webpack'],
     },
     reporters: ['spec', 'coverage'],

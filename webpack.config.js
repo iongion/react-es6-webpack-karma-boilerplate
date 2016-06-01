@@ -23,7 +23,10 @@ module.exports = {
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
-    root: path.resolve(path.join(__dirname, 'src/modules')),
+    root: [
+      path.resolve(path.join(__dirname, 'src/modules')),
+      path.resolve(path.join(__dirname, 'test/modules')),
+    ]
   },
   devtool: 'eval-source-map',
   plugins: [
