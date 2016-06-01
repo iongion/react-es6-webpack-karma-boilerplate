@@ -1,4 +1,6 @@
-/* ES5 file %*/
+/* eslint-disable */
+'use strict';
+
 // node
 const path = require('path');
 // vendors
@@ -34,6 +36,7 @@ module.exports = {
         warnings: false,
       },
     }),
+    new ExtractTextPlugin('css/styles.css', { allChunks: true }),
   ],
   module: {
     loaders: [

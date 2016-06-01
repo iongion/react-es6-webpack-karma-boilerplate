@@ -1,4 +1,6 @@
-/* ES5 file %*/
+/* eslint-disable */
+'use strict';
+
 // node
 // vendors
 const webpack = require('karma-webpack');

@@ -1,4 +1,6 @@
-/* ES5 file %*/
+/* eslint-disable */
+'use strict';
+
 // node
 const path = require('path');
 // vendors
@@ -25,9 +27,9 @@ module.exports = {
   },
   devtool: 'eval-source-map',
   plugins: [
-    new ExtractTextPlugin('css/styles.css', { allChunks: true }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
+    new ExtractTextPlugin('css/styles.css', { allChunks: true }),
   ],
   module: {
     loaders: [

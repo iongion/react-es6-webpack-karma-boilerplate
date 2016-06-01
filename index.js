@@ -1,4 +1,6 @@
-/* ES5 file %*/
+/* eslint-disable */
+'use strict';
+
 // node
 const path = require('path');
 // vendors

@@ -16,16 +16,15 @@
     }
   },
   "scripts": {
-    "start": "node utils/server.js",
-    "server": "npm run start",
-    "assets": "node ./utils/template.js --input ./src/assets --output ./dist",
-    "template": "node ./utils/template.js --input ./src/index.html --output ./dist/index.html",
+    "server": "node ./utils/server.js",
+    "process": "node ./utils/process.js",
     "modules": "node_modules/.bin/webpack --config webpack.config.production.js",
-    "build": "npm run assets && npm run template && npm run modules",
+    "build": "npm run process && npm run modules",
     "test": "node_modules/.bin/karma start --single-run --no-auto-watch karma.config.js",
     "test_watch": "node_modules/.bin/karma start --auto-watch --no-single-run karma.config.js",
     "lint": "node_modules/.bin/eslint ./src ./test",
-    "clean": "node_modules/.bin/rimraf build dist"
+    "clean": "node_modules/.bin/rimraf build dist",
+    "start": "npm run process && npm run server"
   },
   "repository": {
     "type": "git",
@@ -90,6 +89,7 @@
     "karma-spec-reporter": "0.0.26",
     "karma-webpack": "^1.7.0",
     "lolex": "^1.5.0",
+    "mkdirp": "^0.5.1",
     "mocha": "^2.5.3",
     "ncp": "^2.0.0",
     "phantomjs-polyfill": "0.0.2",
@@ -97,11 +97,13 @@
     "postcss-loader": "^0.9.1",
     "react-hot-loader": "^1.3.0",
     "readline": "^1.3.0",
+    "require-dir": "^0.3.0",
     "rimraf": "^2.5.2",
     "sinon": "^1.17.4",
     "sinon-chai": "^2.8.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
+    "walk": "^2.3.9",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   }
