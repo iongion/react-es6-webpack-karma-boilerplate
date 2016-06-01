@@ -10,6 +10,7 @@ const Menu = () => (
   <ul className={MenuCSS.mainMenu}>
     <li><a href="#">File</a></li>
     <li><a href="#">Edit</a></li>
+    <li><a href="#">Tools</a></li>
     <li><a href="#">Help</a></li>
   </ul>
 );

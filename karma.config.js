@@ -27,6 +27,10 @@ webpackConfig.module.loaders = [
     loader: 'url-loader?limit=10000&mimetype=image/svg+xml',
   },
   {
+    test: /\.png$/,
+    loader: 'url-loader?limit=10000&mimetype=image/png',
+  },
+  {
     test: /\.html$/,
     loaders: ['html-loader'],
   },
